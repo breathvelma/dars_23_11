@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Tugma bosish o‘yini</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #eef2ff;
+      padding-top: 50px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #4f46e5;
+      color: white;
+    }
+
+    #clickButton {
+      margin-top: 20px;
+    }
+
+    #score {
+      color: #ef4444;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tugma bosish o‘yini</h1>
+  <p>5 soniya: <span id="time">5</span></p>
+  <p>Ball: <span id="score">0</span></p>
+
+  <button id="startButton" onclick="startGame()">Boshlash</button>
+  <br>
+  <button id="clickButton" onclick="addScore()" disabled>Bos!</button>
+
+  <script>
+    let score = 0;
+    let time = 5;
+    let timer;
+
+    function startGame() {
+      score = 0;
+      time = 5;
+
+      document.getElementById("score").textContent = score;
+      document.getElementById("time").textContent = time;
+      document.getElementById("startButton").disabled = true;
+      document.getElementById("clickButton").disabled = false;
+
+      timer = setInterval(() => {
+        time--;
+        document.getElementById("time").textContent = time;
+
+        if (time === 0) {
+          clearInterval(timer);
+          document.getElementById("clickButton").disabled = true;
+          document.getElementById("startButton").disabled = false;
+          document.getElementById("startButton").textContent = "Qayta o‘ynash";
+          alert("O‘yin tugadi! Natija: " + score);
+        }
+      }, 1000);
+    }
+
+    function addScore() {
+      score++;
+      document.getElementById("score").textContent = score;
+    }
+  </script>
+</body>
+</html>
